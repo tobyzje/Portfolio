@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollToTop from "./components/ScrollToTop";
-
+import { Toaster } from 'sonner';
 
 import { Poppins } from "next/font/google";
 
@@ -10,7 +10,6 @@ const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
 });
-
 
 export const metadata: Metadata = {
   title: "Tobias Stoklund - Webudvikler",
@@ -27,6 +26,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         {children}
         <ScrollToTop />
+        <Toaster richColors />
       </body>
     </html>
   );

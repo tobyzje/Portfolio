@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import { ContactModal } from './ContactModal';
 
 const Hero = () => {
   return (
@@ -56,12 +57,7 @@ const Hero = () => {
             for virksomheder.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#contact"
-              className="rounded-md bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Kontakt Mig
-            </a>
+            <ContactModal />
             <a
               href="#projects"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-indigo-600"
