@@ -4,23 +4,27 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 
+type ThrottledFunction = (...args: unknown[]) => void;
+
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
-  // Throttle scroll event
-  const throttle = (func: Function, limit: number) => {
-    let inThrottle: boolean;
-    return (...args: any[]) => {
+  // Throttle scroll event med korrekte types
+  const throttle = (func: ThrottledFunction, limit: number): ThrottledFunction => {
+    let inThrottle = false;
+    return (...args: unknown[]) => {
       if (!inThrottle) {
         func(...args);
         inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
+        setTimeout(() => {
+          inThrottle = false;
+        }, limit);
       }
     };
   };
 
-  const handleScroll = useCallback(throttle(() => {
+  const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
     const documentHeight = document.documentElement.scrollHeight;
     const windowHeight = window.innerHeight;
@@ -31,24 +35,30 @@ const ScrollToTop = () => {
     } else {
       setIsVisible(false);
     }
-  }, 150), []); // Throttle to 150ms
+  }, []);
+
+  // Wrap throttle i useCallback for at undgå re-creation
+  const throttledHandleScroll = useCallback(
+    throttle(handleScroll, 150),
+    [handleScroll]
+  );
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+    window.addEventListener('scroll', throttledHandleScroll);
+    return () => window.removeEventListener('scroll', throttledHandleScroll);
+  }, [throttledHandleScroll]);
 
   const scrollToTop = () => {
-    if (isScrolling) return; // Prevent multiple clicks while scrolling
+    if (isScrolling) return;
     setIsScrolling(true);
 
-    const duration = 800; // Øget varighed for mere smooth animation
+    const duration = 800;
     const start = window.scrollY;
     const startTime = performance.now();
 
-    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4); // Mere smooth easing funktion
+    const easeOutQuart = (t: number): number => 1 - Math.pow(1 - t, 4);
 
-    const animateScroll = (currentTime: number) => {
+    const animateScroll = (currentTime: number): void => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
