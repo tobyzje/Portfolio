@@ -16,13 +16,13 @@ const technologies: Technology[] = [
     description: 'Den grundlæggende byggesten i moderne webudvikling. Jeg sikrer semantisk korrekt markup der optimerer både brugeroplevelsen og søgemaskineoptimeringen for mine kunders websites.'
   },
   {
-    name: 'CSS3',
+    name: 'CSS3', 
     imagePath: '/images/skills/css3.svg',
     description: 'Ekspert i moderne CSS-teknologier, herunder Flexbox, Grid og animationer. Jeg skaber responsive designs der sikrer en optimal visning på alle enheder og skærmstørrelser.'
   },
   {
     name: 'JavaScript',
-    imagePath: '/images/skills/javascript.svg',
+    imagePath: '/images/skills/javascript.svg', 
     description: 'Omfattende erfaring med moderne JavaScript, hvilket gør det muligt at implementere avanceret funktionalitet og interaktive elementer der forbedrer brugeroplevelsen markant.'
   },
   {
@@ -75,12 +75,30 @@ const libraries: Technology[] = [
   }
 ];
 
+const CMS: Technology[] = [
+  {
+    name: 'WordPress',
+    imagePath: '/images/icons/wordpress.svg',
+    description: 'Ikke så ofte, men jeg har også erfaring med WordPress til at skabe dynamiske og vedligeholdelsesvenlige websites.'
+  },
+  {
+    name: 'Sanity.io',
+    imagePath: '/images/icons/sanity-symbol.svg',
+    description: 'Jeg har brugt Sanity til at skabe dynamiske og vedligeholdelsesvenlige websites. Sammen med Nextjs er det et kraftfuldt værktøj til at skabe moderne og effektive løsninger.'
+  },
+  {
+    name: 'Shopify',
+    imagePath: '/images/icons/shopify.svg',
+    description: 'Ikke meget erfaring med Shopify, men har testet det og kan hjælpe med at oprette en webshop.'
+  }
+];
+
 const SkillCard = ({ name, imagePath, description }: Technology) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="flex gap-6 items-start p-6 rounded-lg hover:bg-white/80 transition-colors shadow-lg"
+    className="flex gap-6 items-start p-6 rounded-lg bg-white/50 hover:bg-white/80 transition-all duration-300 shadow-lg hover:shadow-xl"
   >
     <div className="flex-shrink-0 relative w-16 h-16">
       <Image
@@ -99,20 +117,23 @@ const SkillCard = ({ name, imagePath, description }: Technology) => (
 
 const Skills = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-4">
             Teknologier
           </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Mine primære værktøjer og teknologier til at skabe moderne digitale løsninger
+          </p>
         </motion.div>
 
-        <div className="space-y-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           {technologies.map((tech, index) => (
             <SkillCard
               key={index}
@@ -127,14 +148,17 @@ const Skills = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-4">
             Libraries
           </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Frameworks og biblioteker jeg bruger til at optimere udviklingsprocessen
+          </p>
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           {libraries.map((lib, index) => (
             <SkillCard
               key={index}
@@ -144,9 +168,34 @@ const Skills = () => {
             />
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-4">
+            CMS
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Content Management Systemer jeg har erfaring med
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {CMS.map((cms, index) => (
+            <SkillCard
+              key={index}
+              name={cms.name}
+              imagePath={cms.imagePath}
+              description={cms.description}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
-export default Skills; 
+export default Skills;

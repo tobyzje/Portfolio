@@ -22,14 +22,21 @@ const Hero = () => {
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="mx-auto mb-8 relative w-48 h-48"
+            className="mx-auto mb-8 relative w-48 h-48 group"
           >
             <Image
               src="/images/profile/tobias.jpg"
               alt="Tobias Stoklund"
               fill
-              className="rounded-full object-cover shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300"
-              priority  
+              className="rounded-full object-cover shadow-xl group-hover:opacity-0 transition-all duration-500"
+              priority
+            />
+            <Image 
+              src="/images/profile/logo-stor.png"
+              alt="Mit Logo"
+              fill
+              className="rounded-full object-cover shadow-xl absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-all duration-500 hover:scale-110"
+              priority
             />
           </motion.div>
           
@@ -59,7 +66,9 @@ const Hero = () => {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <ContactModal />
             <a
-              href="#projects"
+              href="https://nationsnetwork.dk/#cases"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-indigo-600"
             >
               Se Mine Projekter <span aria-hidden="true">→</span>
