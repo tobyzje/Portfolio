@@ -15,7 +15,7 @@ export function CallToAction() {
           className="max-w-4xl mx-auto text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Lad os snakke om dit næste projekt
+            Ring til mig
           </h2>
           <p className="text-indigo-100 text-lg mb-8">
             Jeg er altid klar til at høre om nye spændende projekter. 

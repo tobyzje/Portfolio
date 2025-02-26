@@ -57,37 +57,86 @@ export function WorkHistory() {
                   index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 } items-center md:items-start mb-12 last:mb-0`}
               >
-                {/* Tidspunkt cirkel */}
-                <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-lg" />
+                {/* Tidspunkt cirkel med pulserende animation */}
+                <motion.div 
+                  className="absolute left-0 md:left-1/2 transform -translate-x-1/2"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [1, 0.8, 1]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <div className="w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-lg" />
+                </motion.div>
 
                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'}`}>
-                  <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
-                    <div className="flex items-center mb-3 text-indigo-600">
+                  <motion.div 
+                    className="bg-white p-6 rounded-lg shadow-lg border border-gray-100 transition-all"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <motion.div 
+                      className="flex items-center mb-3 text-indigo-600"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       <Calendar className="w-5 h-5 mr-2" />
                       <span className="font-medium">{experience.period}</span>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-center mb-4">
+                    <motion.div 
+                      className="flex items-center mb-4"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       <Building2 className="w-5 h-5 mr-2 text-gray-600" />
                       <h3 className="text-xl font-semibold text-gray-900">
                         {experience.company}
                       </h3>
-                    </div>
+                    </motion.div>
                     
                     <p className="text-gray-600 font-medium mb-2">{experience.title}</p>
                     <p className="text-gray-600 mb-4">{experience.description}</p>
                     
-                    <div className="flex flex-wrap gap-2">
+                    <motion.div 
+                      className="flex flex-wrap gap-2"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={{
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.1
+                          }
+                        }
+                      }}
+                    >
                       {experience.technologies.map((tech, techIndex) => (
-                        <span
+                        <motion.span
                           key={techIndex}
                           className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-medium"
+                          variants={{
+                            hidden: { opacity: 0, scale: 0.8 },
+                            visible: { opacity: 1, scale: 1 }
+                          }}
+                          whileHover={{ 
+                            scale: 1.1,
+                            backgroundColor: "rgb(99 102 241 / 0.2)"
+                          }}
                         >
                           {tech}
-                        </span>
+                        </motion.span>
                       ))}
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
