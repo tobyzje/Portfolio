@@ -12,31 +12,64 @@ interface Particle {
 }
 
 const PARTICLE_COLORS = [
-  'rgb(79, 70, 229, 0.4)', // indigo-600 med højere opacity
-  'rgb(99, 102, 241, 0.4)', // indigo-500 med højere opacity
-  'rgb(129, 140, 248, 0.4)', // indigo-400 med højere opacity
-  'rgb(165, 180, 252, 0.3)', // indigo-300 med medium opacity
-  'rgb(199, 210, 254, 0.3)', // indigo-200 med medium opacity
+  'rgb(79, 70, 229, 0.3)', // indigo-600
+  'rgb(99, 102, 241, 0.3)', // indigo-500
+  'rgb(129, 140, 248, 0.3)', // indigo-400
+  'rgb(165, 180, 252, 0.2)', // indigo-300
+  'rgb(199, 210, 254, 0.2)', // indigo-200
 ];
+
+// Custom hook for at detektere skærmstørrelse
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const updateMatch = () => setMatches(media.matches);
+    
+    updateMatch();
+    media.addEventListener('change', updateMatch);
+    
+    return () => media.removeEventListener('change', updateMatch);
+  }, [query]);
+
+  return matches;
+};
 
 const ParticleBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isTablet = useMediaQuery('(max-width: 1024px)');
 
   useEffect(() => {
-    // Opret flere partikler
-    const newParticles = Array.from({ length: 250 }, (_, i) => ({
+    const getParticleCount = () => {
+      if (isMobile) return 50;  // Færre partikler på mobil
+      if (isTablet) return 100; // Medium antal på tablet
+      return 150;               // Fuldt antal på desktop
+    };
+
+    const getParticleSize = (index: number) => {
+      if (isMobile) {
+        return Math.random() * 3 + (index % 3 === 0 ? 3 : 2);
+      }
+      return Math.random() * 4 + (index % 3 === 0 ? 4 : 2);
+    };
+
+    const newParticles = Array.from({ length: getParticleCount() }, (_, i) => ({
       id: i,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: Math.random() * 6 + (i % 3 === 0 ? 6 : 3), // Større partikler
+      size: getParticleSize(i),
       color: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
     }));
     setParticles(newParticles);
-  }, []);
+  }, [isMobile, isTablet]);
 
   const handleMouseMove = useCallback((event: MouseEvent) => {
+    if (isMobile) return; // Deaktiver mouse interaction på mobile enheder
+    
     const { clientX, clientY } = event;
-    const bounds = 150; // Større påvirkningsområde
+    const bounds = 100;
     
     setParticles(prev => 
       prev.map(particle => {
@@ -48,17 +81,19 @@ const ParticleBackground = () => {
           const force = (bounds - distance) / bounds;
           return {
             ...particle,
-            x: particle.x - (deltaX * force * 0.3), // Mere bevægelse
-            y: particle.y - (deltaY * force * 0.3),
+            x: particle.x - (deltaX * force * 0.2),
+            y: particle.y - (deltaY * force * 0.2),
           };
         }
         return particle;
       })
     );
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
     
     const handleResize = () => {
       setParticles(prev => 
@@ -69,13 +104,16 @@ const ParticleBackground = () => {
         }))
       );
     };
+    
     window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (!isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
       window.removeEventListener('resize', handleResize);
     };
-  }, [handleMouseMove]);
+  }, [handleMouseMove, isMobile]);
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -88,21 +126,21 @@ const ParticleBackground = () => {
             top: particle.y,
           }}
           animate={{
-            opacity: [0.3, 0.6, 0.3], // Højere opacity værdier
+            opacity: isMobile ? 0.3 : [0.2, 0.4, 0.2],
             left: particle.x,
             top: particle.y,
           }}
           transition={{
-            duration: 3, // Længere animation
+            duration: isMobile ? 2 : 3,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "linear",
             left: {
-              duration: 0.7,
-              ease: "easeOut"
+              duration: 0.5,
+              ease: "linear"
             },
             top: {
-              duration: 0.7,
-              ease: "easeOut"
+              duration: 0.5,
+              ease: "linear"
             }
           }}
           style={{
@@ -111,7 +149,7 @@ const ParticleBackground = () => {
             height: particle.size,
             backgroundColor: particle.color,
             borderRadius: '50%',
-            filter: 'blur(1px)', // Mere blur for blødere look
+            filter: isMobile ? 'blur(0.5px)' : 'blur(1px)',
             pointerEvents: 'none',
           }}
         />

@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Building2, Calendar } from 'lucide-react';
+import { Building2, Calendar, Download } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const workExperience = [
   {
@@ -13,10 +14,11 @@ const workExperience = [
   },
   {
     period: "2025 - 2025",
-    company: "Praktikant",
+    company: "Golf Experten",
     title: "Golf Rådgiver",
-    description: "Arbejdede som praktikant som golf rådgiver i Golf Experten i Kolding.",
-    technologies: ["Golf", "Golf Rådgiver", "Salg", "Kundeservice", "Kunderelationer", "Eventplanlægning", "Salg af fysiske produkter"]
+    description: "Arbejdede som praktikant som golf rådgiver i Golf Experten i Kolding. Fik en positiv udtalelse for mit engagement og kundeservice.",
+    technologies: ["Golf", "Golf Rådgiver", "Salg", "Kundeservice", "Kunderelationer", "Eventplanlægning", "Salg af fysiske produkter"],
+    hasRecommendation: true
   },
   {
     period: "2020 - Nu",
@@ -105,6 +107,22 @@ export function WorkHistory() {
                     
                     <p className="text-gray-600 font-medium mb-2">{experience.title}</p>
                     <p className="text-gray-600 mb-4">{experience.description}</p>
+                    
+                    {experience.hasRecommendation && (
+                      <motion.div 
+                        className="mb-4"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Button
+                          variant="outline"
+                          className="w-full flex items-center justify-center gap-2 text-indigo-600 border-indigo-600 hover:bg-indigo-50"
+                          onClick={() => window.open('/documents/golf-experten-udtalelse.pdf', '_blank')}
+                        >
+                          <Download className="w-4 h-4" />
+                          Download Udtalelse
+                        </Button>
+                      </motion.div>
+                    )}
                     
                     <motion.div 
                       className="flex flex-wrap gap-2"
