@@ -5,6 +5,7 @@ import { generateMetadata } from '@/app/components/SEO';
 import Head from 'next/head';
 
 import { Poppins } from "next/font/google";
+import CookieBanner from './components/CookieBanner';
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -24,6 +25,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Cookie consent state
+
   return (
     <html lang="da">
       <Head>
@@ -60,6 +63,7 @@ export default function RootLayout({
         {children}
         <ScrollToTop />
         <Toaster richColors />
+        <CookieBanner />
       </body>
     </html>
   );
