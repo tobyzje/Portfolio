@@ -46,11 +46,11 @@ const Hero = () => {
           <div className="mt-4 text-xl text-gray-600 sm:text-2xl">
             <TypeAnimation
               sequence={[
-                'Frontend Udvikler',
-                2000,
-                'Webudvikler',
+                'Full Stack Udvikler',
                 2000,
                 'UI/UX Designer',
+                2000,
+                'Webudvikler',
                 2000,
               ]}
               wrapper="span"
@@ -59,20 +59,12 @@ const Hero = () => {
             />
           </div>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Selvlært webudvikler og grundlægger af NationsNetwork. 
+            Selvlært webudvikler og freelance specialist. 
             Specialiseret i at skabe moderne og effektive digitale løsninger 
             for virksomheder.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <ContactModal />
-            <a
-              href="https://nationsnetwork.dk/#cases"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg font-semibold leading-6 text-gray-900 hover:text-indigo-600"
-            >
-              Se Mine Projekter <span aria-hidden="true">→</span>
-            </a>
           </div>
           
           {/* Sociale medier */}

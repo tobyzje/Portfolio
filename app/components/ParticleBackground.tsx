@@ -12,11 +12,11 @@ interface Particle {
 }
 
 const PARTICLE_COLORS = [
-  'rgb(79, 70, 229, 0.3)', // indigo-600
-  'rgb(99, 102, 241, 0.3)', // indigo-500
-  'rgb(129, 140, 248, 0.3)', // indigo-400
-  'rgb(165, 180, 252, 0.2)', // indigo-300
-  'rgb(199, 210, 254, 0.2)', // indigo-200
+  'rgb(16, 185, 129, 0.3)', // emerald-500
+  'rgb(5, 150, 105, 0.3)', // emerald-600
+  'rgb(52, 211, 153, 0.3)', // emerald-400
+  'rgb(110, 231, 183, 0.2)', // emerald-300
+  'rgb(167, 243, 208, 0.2)', // emerald-200
 ];
 
 // Custom hook for at detektere skærmstørrelse

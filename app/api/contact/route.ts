@@ -26,8 +26,8 @@ export async function POST(request: Request) {
 
     // Opret email indhold
     const mailOptions = {
-      from: process.env.SMTP_FROM || process.env.SMTP_USER,
-      to: 'tstoklund9@gmail.com',
+      from: process.env.SMTP_FROM,
+      to: process.env.SMTP_USER,
       subject: 'Ny kontaktformular henvendelse',
       text: `
         Navn: ${data.name}
@@ -36,30 +36,31 @@ export async function POST(request: Request) {
         Besked: ${data.message}
       `,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background-color: #4F46E5; padding: 20px; border-radius: 8px 8px 0 0;">
-            <h2 style="color: white; margin: 0; font-size: 24px;">Ny henvendelse fra kontaktformular</h2>
+        <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #F6FDFB; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 32px 0 #0000000d;">
+          <div style="background: linear-gradient(90deg, #10B981 0%, #059669 100%); padding: 32px 24px 24px 24px; text-align: center;">
+            <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4e7.png' alt='Mail ikon' width='48' height='48' style='margin-bottom: 12px;' />
+            <h2 style="color: #fff; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -1px;">Ny henvendelse fra kontaktformular</h2>
           </div>
-          <div style="background-color: #ffffff; padding: 20px; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb;">
-            <div style="margin-bottom: 20px;">
-              <p style="font-weight: bold; color: #374151; margin-bottom: 5px;">Navn:</p>
-              <p style="margin: 0; color: #4B5563; background-color: #F9FAFB; padding: 10px; border-radius: 4px;">${data.name}</p>
+          <div style="background: #fff; padding: 32px 24px 24px 24px; border-radius: 0 0 16px 16px; border-top: 1px solid #E5E7EB;">
+            <div style="margin-bottom: 24px;">
+              <p style="font-weight: 600; color: #10B981; margin-bottom: 6px; font-size: 15px;">Navn</p>
+              <div style="color: #374151; background: #F0FDF4; padding: 12px 16px; border-radius: 8px; font-size: 16px;">${data.name}</div>
             </div>
-            <div style="margin-bottom: 20px;">
-              <p style="font-weight: bold; color: #374151; margin-bottom: 5px;">Email:</p>
-              <p style="margin: 0; color: #4B5563; background-color: #F9FAFB; padding: 10px; border-radius: 4px;">${data.email}</p>
+            <div style="margin-bottom: 24px;">
+              <p style="font-weight: 600; color: #10B981; margin-bottom: 6px; font-size: 15px;">Email</p>
+              <div style="color: #374151; background: #F0FDF4; padding: 12px 16px; border-radius: 8px; font-size: 16px;">${data.email}</div>
             </div>
-            <div style="margin-bottom: 20px;">
-              <p style="font-weight: bold; color: #374151; margin-bottom: 5px;">Telefon:</p>
-              <p style="margin: 0; color: #4B5563; background-color: #F9FAFB; padding: 10px; border-radius: 4px;">${data.phone}</p>
+            <div style="margin-bottom: 24px;">
+              <p style="font-weight: 600; color: #10B981; margin-bottom: 6px; font-size: 15px;">Telefon</p>
+              <div style="color: #374151; background: #F0FDF4; padding: 12px 16px; border-radius: 8px; font-size: 16px;">${data.phone}</div>
             </div>
-            <div>
-              <p style="font-weight: bold; color: #374151; margin-bottom: 5px;">Besked:</p>
-              <p style="margin: 0; color: #4B5563; background-color: #F9FAFB; padding: 10px; border-radius: 4px; white-space: pre-wrap;">${data.message}</p>
+            <div style="margin-bottom: 8px;">
+              <p style="font-weight: 600; color: #10B981; margin-bottom: 6px; font-size: 15px;">Besked</p>
+              <div style="color: #374151; background: #F0FDF4; padding: 16px 16px; border-radius: 8px; font-size: 16px; white-space: pre-wrap;">${data.message}</div>
             </div>
           </div>
-          <div style="text-align: center; margin-top: 20px; color: #6B7280; font-size: 14px;">
-            <p>Denne email blev sendt fra kontaktformularen på Tobiasstoklund.dk</p>
+          <div style="text-align: center; margin: 0; color: #6B7280; font-size: 13px; padding: 18px 0 10px 0; background: #F6FDFB; border-radius: 0 0 16px 16px;">
+            <p style="margin: 0;">Denne email blev sendt fra kontaktformularen på <b>tobiasstoklund.dk</b></p>
           </div>
         </div>
       `

@@ -89,7 +89,7 @@ const CMS: Technology[] = [
   {
     name: 'Shopify',
     imagePath: '/images/icons/shopify.svg',
-    description: 'Ikke meget erfaring med Shopify, men har testet det og kan hjælpe med at oprette en webshop.'
+    description: 'Ikke meget erfaring med Shopify, men har testet det og kan oprette en webshop.'
   }
 ];
 

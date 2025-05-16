@@ -1,24 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Building2, Calendar, Download } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Building2, Calendar } from 'lucide-react';
 
 const workExperience = [
   {
     period: "2024 - Nu",
-    company: "NationsNetwork",
-    title: "Grundlægger & Webudvikler",
-    description: "Etablerede og driver NationsNetwork, et webbureau specialiseret i skræddersyede digitale løsninger. Arbejder med WordPress, Shopify og custom web-applikationer.",
+    company: "Freelance Webudvikler",
+    title: "Webudvikler & UI/UX Designer",
+    description: "Arbejder som selvstændig freelance webudvikler med fokus på skræddersyede digitale løsninger. Speciale i React, Next.js og moderne webteknologier.",
     technologies: ["React", "Next.js", "WordPress", "Shopify", "Tailwind CSS"]
-  },
-  {
-    period: "2025 - 2025",
-    company: "Golf Experten",
-    title: "Golf Rådgiver",
-    description: "Arbejdede som praktikant som golf rådgiver i Golf Experten i Kolding. Fik en positiv udtalelse for mit engagement og kundeservice.",
-    technologies: ["Golf", "Golf Rådgiver", "Salg", "Kundeservice", "Kunderelationer", "Eventplanlægning", "Salg af fysiske produkter"],
-    hasRecommendation: true
   },
   {
     period: "2020 - Nu",
@@ -26,6 +17,13 @@ const workExperience = [
     title: "Selvlært",
     description: "Dedikerede mig til intensiv selvlæring inden for webudvikling, med fokus på moderne frontend-teknologier og best practices.",
     technologies: ["React", "JavaScript", "CSS", "Responsive Design", "Nextjs", "Tailwind CSS", "Framer Motion", "Sanity", "Shopify", "WordPress"]
+  },
+  {
+    period: "27. Juni 2002",
+    company: "Det hele startede her",
+    title: "Født",
+    description: "Jeg er født på Grindsted Sygehus den 27. Juni 2002.",
+    technologies: ["Født", "Grindsted Sygehus", "Forældre", "Søster"]
   }
 ];
 
@@ -41,12 +39,12 @@ export function WorkHistory() {
           className="max-w-4xl mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
-            Min Arbejdshistorik
+            Min Karriere
           </h2>
 
           <div className="relative">
             {/* Vertikal linje */}
-            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-indigo-200" />
+            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-emerald-200" />
 
             {workExperience.map((experience, index) => (
               <motion.div
@@ -72,7 +70,7 @@ export function WorkHistory() {
                     ease: "easeInOut"
                   }}
                 >
-                  <div className="w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-lg" />
+                  <div className="w-4 h-4 bg-emerald-500 rounded-full border-4 border-white shadow-lg" />
                 </motion.div>
 
                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'}`}>
@@ -88,7 +86,7 @@ export function WorkHistory() {
                     transition={{ duration: 0.4 }}
                   >
                     <motion.div 
-                      className="flex items-center mb-3 text-indigo-600"
+                      className="flex items-center mb-3 text-emerald-600"
                       whileHover={{ scale: 1.05 }}
                     >
                       <Calendar className="w-5 h-5 mr-2" />
@@ -108,21 +106,21 @@ export function WorkHistory() {
                     <p className="text-gray-600 font-medium mb-2">{experience.title}</p>
                     <p className="text-gray-600 mb-4">{experience.description}</p>
                     
-                    {experience.hasRecommendation && (
+                    {/* {experience.hasRecommendation && (
                       <motion.div 
                         className="mb-4"
                         whileHover={{ scale: 1.05 }}
                       >
                         <Button
                           variant="outline"
-                          className="w-full flex items-center justify-center gap-2 text-indigo-600 border-indigo-600 hover:bg-indigo-50"
+                          className="w-full flex items-center justify-center gap-2 text-emerald-600 border-emerald-600 hover:bg-emerald-50"
                           onClick={() => window.open('/documents/golf-experten-udtalelse.pdf', '_blank')}
                         >
                           <Download className="w-4 h-4" />
                           Download Udtalelse
                         </Button>
                       </motion.div>
-                    )}
+                    )} */}
                     
                     <motion.div 
                       className="flex flex-wrap gap-2"
@@ -140,14 +138,14 @@ export function WorkHistory() {
                       {experience.technologies.map((tech, techIndex) => (
                         <motion.span
                           key={techIndex}
-                          className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-medium"
+                          className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-sm font-medium"
                           variants={{
                             hidden: { opacity: 0, scale: 0.8 },
                             visible: { opacity: 1, scale: 1 }
                           }}
                           whileHover={{ 
                             scale: 1.1,
-                            backgroundColor: "rgb(99 102 241 / 0.2)"
+                            backgroundColor: "rgb(16 185 129 / 0.2)"
                           }}
                         >
                           {tech}

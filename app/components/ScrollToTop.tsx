@@ -11,7 +11,7 @@ const ScrollToTop = () => {
   const [isScrolling, setIsScrolling] = useState(false);
 
   // Throttle scroll event med korrekte types
-  const throttle = (func: ThrottledFunction, limit: number): ThrottledFunction => {
+  const throttle = useCallback((func: ThrottledFunction, limit: number): ThrottledFunction => {
     let inThrottle = false;
     return (...args: unknown[]) => {
       if (!inThrottle) {
@@ -22,7 +22,7 @@ const ScrollToTop = () => {
         }, limit);
       }
     };
-  };
+  }, []);
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
@@ -38,10 +38,9 @@ const ScrollToTop = () => {
   }, []);
 
   // Wrap throttle i useCallback for at undgå re-creation
-  const throttledHandleScroll = useCallback(
-    throttle(handleScroll, 150),
-    [handleScroll]
-  );
+  const throttledHandleScroll = useCallback(() => {
+    throttle(handleScroll, 150)();
+  }, [throttle, handleScroll]);
 
   useEffect(() => {
     window.addEventListener('scroll', throttledHandleScroll);
@@ -99,8 +98,8 @@ const ScrollToTop = () => {
           }}
           onClick={scrollToTop}
           disabled={isScrolling}
-          className={`fixed bottom-8 right-8 bg-indigo-600/90 backdrop-blur-sm text-white p-4 rounded-full shadow-lg transition-all duration-300 border border-white/10 z-50 group
-            ${isScrolling ? 'cursor-not-allowed opacity-50' : 'hover:bg-indigo-500 hover:shadow-indigo-500/25 hover:shadow-xl'}`}
+          className={`fixed bottom-8 right-8 bg-emerald-600/90 backdrop-blur-sm text-white p-4 rounded-full shadow-lg transition-all duration-300 border border-white/10 z-50 group
+            ${isScrolling ? 'cursor-not-allowed opacity-50' : 'hover:bg-emerald-500 hover:shadow-emerald-500/25 hover:shadow-xl'}`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -125,4 +124,4 @@ const ScrollToTop = () => {
   );
 };
 
-export default ScrollToTop; 
+export default ScrollToTop;

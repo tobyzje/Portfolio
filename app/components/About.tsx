@@ -2,14 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCode, faHandshake, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faCode, faHandshake, faMoneyBills } from '@fortawesome/free-solid-svg-icons';
 
 const features = [
-  {
-    icon: faLightbulb,
-    title: 'NationsNetwork.dk',
-    description: 'Grundlægger af NationsNetwork, hvor vi specialiserer os i at udvikle skræddersyede webløsninger der hjælper virksomheder med at styrke deres digitale tilstedeværelse.'
-  },
   {
     icon: faCode,
     title: 'Moderne Teknologier',
@@ -19,6 +14,11 @@ const features = [
     icon: faHandshake,
     title: 'Tæt Samarbejde',
     description: 'Lægger stor vægt på at forstå hver kundes unikke behov og forretningsmål, for at kunne levere målrettede digitale løsninger der skaber reel værdi.'
+  },
+  {
+    icon: faMoneyBills,
+    title: 'Billigt & Effektivt',
+    description: 'Jeg arbejder med at levere høj kvalitet til en lavere pris, for at sikre, at kunden får den bedste værdi for deres penge.'
   }
 ];
 
@@ -34,26 +34,11 @@ const About = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
-            Om NationsNetwork
+            Om Mig
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Som grundlægger af NationsNetwork har jeg dedikeret mig til at levere 
-            professionelle webløsninger af højeste kvalitet. Vi kombinerer teknisk 
-            ekspertise med strategisk forståelse for at skabe digitale løsninger, 
-            der ikke bare ser godt ud, men også leverer målbare resultater for vores 
-            kunder. Med fokus på moderne teknologier og best practices, sikrer vi 
-            at hver løsning er bygget til fremtiden.
+            Jeg er freelance webudvikler med fokus på at levere professionelle webløsninger af højeste kvalitet. Jeg kombinerer teknisk ekspertise med strategisk forståelse for at skabe digitale løsninger, der ikke bare ser godt ud, men også leverer målbare resultater for mine kunder. Med fokus på moderne teknologier og best practices sikrer jeg, at hver løsning er bygget til fremtiden.
           </p>
-          <motion.a
-            href="https://nationsnetwork.dk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-6 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Se Vores Arbejde
-          </motion.a>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
@@ -67,7 +52,7 @@ const About = () => {
               className="relative p-6 bg-white/80 rounded-xl backdrop-blur-sm shadow-lg"
             >
               <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center transform rotate-45">
+                <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center transform rotate-45">
                   <FontAwesomeIcon 
                     icon={feature.icon} 
                     className="w-4 h-4 text-white transform -rotate-45" 
